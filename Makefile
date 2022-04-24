@@ -16,31 +16,31 @@ SRC_DIR			= ${ROOT_DIR}/srcs/
 HEADER_DIR		= ${ROOT_DIR}/includes/
 
 # COMPILER
-SRC			= $(addprefix ${SRC_DIR}, )
+SRC			= $(addprefix ${SRC_DIR}, main.c)
 OBJ			= $(SRC:.c=.o)
-NAME 			= philo
-NORM_BIN		= norminette
-NORM_FLAGS		= -RCheckForbiddenSourceHeader -RCheckDefine
+NAME 		= philo
+NORM_BIN	= norminette
+NORM_FLAGS	= -RCheckForbiddenSourceHeader -RCheckDefine
 RM			= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I${HEADER_DIR}
+MACROFLAGS	= -D BIN_NAME=\"${NAME}\"
+CFLAGS		= -Wall -Wextra -Werror -I${HEADER_DIR} ${MACROFLAGS}
 CC			= gcc
-LIBFT_FLAGS		= -L${LIBFT_DIR}
 
 .PHONY: 	all clean fclean re
 
 ${NAME}:	${OBJ}
-		${CC} ${CFLAGS} ${OBJ} -o ${NAME}
+			${CC} ${CFLAGS} ${OBJ} -o ${NAME}
 
 all: 		${NAME}
 
 clean:
-		${RM} ${OBJ}
+			${RM} ${OBJ}
 
 fclean: 	clean
-		${RM} ${NAME}
+			${RM} ${NAME}
 
-re:		fclean ${NAME}
+re:			fclean ${NAME}
 
 norm:		fclean
-		echo "\n\n"
-		${NORM_BIN} ${NORM_FLAGS} ${SRC}
+			echo "\n\n"
+			${NORM_BIN} ${NORM_FLAGS} ${SRC} ${HEADER_DIR}
