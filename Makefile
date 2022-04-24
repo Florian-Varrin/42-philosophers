@@ -16,14 +16,15 @@ SRC_DIR			= ${ROOT_DIR}/srcs/
 HEADER_DIR		= ${ROOT_DIR}/includes/
 
 # COMPILER
-SRC			= $(addprefix ${SRC_DIR}, main.c)
+SRC			= $(addprefix ${SRC_DIR}, main.c state.c parameters.c philosopher.c \
+ 				fork.c utils.c)
 OBJ			= $(SRC:.c=.o)
 NAME 		= philo
 NORM_BIN	= norminette
 NORM_FLAGS	= -RCheckForbiddenSourceHeader -RCheckDefine
 RM			= rm -f
 MACROFLAGS	= -D BIN_NAME=\"${NAME}\"
-CFLAGS		= -Wall -Wextra -Werror -I${HEADER_DIR} ${MACROFLAGS}
+CFLAGS		= -Wall -Wextra -Werror -I${HEADER_DIR} ${MACROFLAGS} -g
 CC			= gcc
 
 .PHONY: 	all clean fclean re
