@@ -6,12 +6,14 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/04/24 15:02:58 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 13:58:10 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
+
+#include <pthread.h>
 
 typedef enum e_philosophers_state {
 	EATING,
@@ -27,6 +29,7 @@ typedef enum e_fork_state {
 typedef enum e_error_codes {
 	INVALID_ARGUMENTS = 1,
 	ERROR_WHILE_ALLOCATING_MEMORY = 2,
+	ERROR_WHILE_CREATING_MUTEX = 3,
 }	t_error_codes;
 
 typedef struct s_parameters {
@@ -53,6 +56,7 @@ typedef struct s_state {
 	t_parameters	*parameters;
 	t_philosopher	**philosophers;
 	t_fork			**forks;
+	pthread_mutex_t	*forks_mutex;
 }	t_state;
 
 /* Utils */
@@ -108,6 +112,8 @@ _Bool			check_parameters_constraints(t_parameters *parameters);
 int				init_philosophers(t_state *state, t_parameters *parameters);
 
 void			destroy_philosophers(t_state *state);
+
+t_philosopher *get_philosopher_from_id(t_philosopher **philosophers, int id);
 
 /* Forks */
 int				init_forks(t_state *state, t_parameters *parameters);

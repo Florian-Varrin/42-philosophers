@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:10:43 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/04/24 14:59:11 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 13:50:50 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ int	init_state(t_state **state, int argc, char **argv)
 		return (ERROR_WHILE_ALLOCATING_MEMORY);
 	if (init_forks(*state, parameters) != 0)
 		return (ERROR_WHILE_ALLOCATING_MEMORY);
+	if (pthread_mutex_init((*state)->forks_mutex, NULL) != 0)
+		return (ERROR_WHILE_CREATING_MUTEX);
 	return (0);
 }
 
 t_state	*destroy_state(t_state *state)
 {
+	pthread_mutex_destroy(state->forks_mutex);
 	if (state->parameters == NULL)
 	{
 		free(state);

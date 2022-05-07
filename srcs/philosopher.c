@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:46:41 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/04/24 14:59:23 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 13:55:44 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,9 @@ void	destroy_philosophers(t_state *state)
 	while (i < state->parameters->number_of_philosophers)
 		destroy_philosopher(state->philosophers[i++]);
 	free(state->philosophers);
+}
+
+t_philosopher *get_philosopher_from_id(t_philosopher **philosophers,int id)
+{
+	return philosophers[id - 1];
 }
