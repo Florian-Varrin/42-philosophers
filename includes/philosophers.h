@@ -6,14 +6,14 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 13:58:10 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 14:59:04 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include <pthread.h>
+# include <pthread.h>
 
 typedef enum e_philosophers_state {
 	EATING,
@@ -56,8 +56,14 @@ typedef struct s_state {
 	t_parameters	*parameters;
 	t_philosopher	**philosophers;
 	t_fork			**forks;
-	pthread_mutex_t	*forks_mutex;
+	pthread_mutex_t	forks_mutex;
+	_Bool			a_philosopher_died;
 }	t_state;
+
+typedef struct s_philosopher_state {
+	int		id;
+	t_state	*state;
+}	t_philosopher_state;
 
 /* Utils */
 
@@ -68,19 +74,19 @@ typedef struct s_state {
  *
  * @return {int}
  */
-int				ft_atoi(const char *str);
+int					ft_atoi(const char *str);
 
 /**
  * @param {char *} str
  *
  * @return {int} length of a string
  */
-int				ft_strlen(const char *str);
+int					ft_strlen(const char *str);
 
 /* State */
-int				init_state(t_state **state, int argc, char **argv);
+int					init_state(t_state **state, int argc, char **argv);
 
-t_state			*destroy_state(t_state *state);
+t_state				*destroy_state(t_state *state);
 
 /* Parameters */
 /**
@@ -93,11 +99,11 @@ t_state			*destroy_state(t_state *state);
  *
  * @return {int} result
  */
-int				parse_parameters(
-					t_parameters **parameters,
-					int argc,
-					char **argv
-					);
+int					parse_parameters(
+						t_parameters **parameters,
+						int argc,
+						char **argv
+						);
 
 /**
  * Check that parameters respect constraints. Return true if it's ok, false
@@ -106,17 +112,30 @@ int				parse_parameters(
  * @param {t_parameters *} parameters
  * @return  {_Bool} result
  */
-_Bool			check_parameters_constraints(t_parameters *parameters);
+_Bool				check_parameters_constraints(t_parameters *parameters);
 
 /* Philosophers */
-int				init_philosophers(t_state *state, t_parameters *parameters);
+int					init_philosophers(t_state *state, t_parameters *parameters);
 
-void			destroy_philosophers(t_state *state);
+void				destroy_philosophers(t_state *state);
 
-t_philosopher *get_philosopher_from_id(t_philosopher **philosophers, int id);
+t_philosopher		*get_philosopher_from_id(
+						t_philosopher **philosophers, int id);
+
+t_philosopher_state	**init_philosopher_states(t_state *state);
+
+t_philosopher_state	*destroy_philosopher_states(
+						t_philosopher_state **philosopher_states);
+
+void				*run_philosopher(void *state);
 
 /* Forks */
-int				init_forks(t_state *state, t_parameters *parameters);
+int					init_forks(t_state *state, t_parameters *parameters);
 
-void			destroy_forks(t_state *state);
+void				destroy_forks(t_state *state);
+
+/* Threads */
+pthread_t			*init_threads(t_state *state);
+
+pthread_t			*destroy_threads(pthread_t *threads);
 #endif

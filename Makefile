@@ -17,7 +17,7 @@ HEADER_DIR		= ${ROOT_DIR}/includes/
 
 # COMPILER
 SRC			= $(addprefix ${SRC_DIR}, main.c state.c parameters.c philosopher.c \
- 				fork.c utils.c philosopher-actions.c)
+ 				fork.c utils.c philosopher-actions.c philosopher-state.c threads.c)
 OBJ			= $(SRC:.c=.o)
 NAME 		= philo
 NORM_BIN	= norminette
