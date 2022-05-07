@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:31:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 14:55:13 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 15:12:00 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,30 @@ int	exit_error(int exit_code, char *message)
 	return (exit_code);
 }
 
-void	run(t_state *state)
+int	run(t_state *state)
 {
-	int					i;
+	int					thread_result;
 	pthread_t			*threads;
 	t_philosopher_state	**philosopher_states;
 
 	threads = init_threads(state);
 	philosopher_states = init_philosopher_states(state);
-	i = 0;
-	while (i < state->parameters->number_of_philosophers)
-	{
-		pthread_create(
-			&threads[i], NULL, &run_philosopher, philosopher_states[i]);
-		i++;
-	}
-	i = 0;
-	while (i < state->parameters->number_of_philosophers)
-	{
-		pthread_join(threads[i], NULL);
-		i++;
-	}
+	thread_result = create_threads(state, threads, philosopher_states);
+	if (thread_result != 0)
+		return (thread_result);
+	thread_result = join_threads(state, threads);
+	if (thread_result != 0)
+		return (thread_result);
 	destroy_philosopher_states(philosopher_states);
 	destroy_threads(threads);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_state				*state;
 	int					state_init_result;
+	int					run_result;
 
 	if (argc != 4 && argc != 5)
 		return (print_usage(INVALID_ARGUMENTS));
@@ -74,7 +69,7 @@ int	main(int argc, char **argv)
 		destroy_state(state);
 		return (state_init_result);
 	}
-	run(state);
+	run_result = run(state);
 	destroy_state(state);
-	return (0);
+	return (run_result);
 }

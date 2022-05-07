@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 14:59:04 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 15:12:19 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef enum e_error_codes {
 	INVALID_ARGUMENTS = 1,
 	ERROR_WHILE_ALLOCATING_MEMORY = 2,
 	ERROR_WHILE_CREATING_MUTEX = 3,
+	ERROR_WHILE_CREATING_THREAD = 4,
+	ERROR_WHILE_JOINING_THREAD = 5
 }	t_error_codes;
 
 typedef struct s_parameters {
@@ -82,6 +84,8 @@ int					ft_atoi(const char *str);
  * @return {int} length of a string
  */
 int					ft_strlen(const char *str);
+
+int					exit_error(int exit_code, char *message);
 
 /* State */
 int					init_state(t_state **state, int argc, char **argv);
@@ -138,4 +142,9 @@ void				destroy_forks(t_state *state);
 pthread_t			*init_threads(t_state *state);
 
 pthread_t			*destroy_threads(pthread_t *threads);
+
+int					create_threads(t_state *state, pthread_t *threads,
+						t_philosopher_state **philosopher_states);
+
+int					join_threads(t_state *state, pthread_t *threads);
 #endif
