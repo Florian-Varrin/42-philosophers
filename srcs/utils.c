@@ -6,12 +6,13 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 13:01:13 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 13:44:09 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 16:19:02 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include <stddef.h>
+#include <stdio.h>
+
 #include "philosophers.h"
 
 _Bool	ft_isspace(const char c)
@@ -55,4 +56,9 @@ int	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	log_message(int id, char *message)
+{
+	printf("%ld %d %s\n", get_current_time(), id, message);
 }

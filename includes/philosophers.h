@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 15:12:19 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/08 18:22:49 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ typedef struct s_parameters {
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	number_of_times_each_philosopher_must_eat;
+	int	number_of_times_must_eat;
 }	t_parameters;
 
 typedef struct s_philosopher {
 	int						id;
 	t_philosophers_state	state;
 	int						number_of_time_has_eaten;
-	int						last_time_has_eaten;
+	long					last_time_has_eaten;
+	_Bool					is_dead;
 }	t_philosopher;
 
 typedef struct s_fork {
@@ -59,13 +60,12 @@ typedef struct s_state {
 	t_philosopher	**philosophers;
 	t_fork			**forks;
 	pthread_mutex_t	forks_mutex;
-	_Bool			a_philosopher_died;
 }	t_state;
 
-typedef struct s_philosopher_state {
+typedef struct s_life_cycle_state {
 	int		id;
 	t_state	*state;
-}	t_philosopher_state;
+}	t_life_cycle_state;
 
 /* Utils */
 
@@ -85,7 +85,21 @@ int					ft_atoi(const char *str);
  */
 int					ft_strlen(const char *str);
 
+/**
+ * Return current timestamp is ms
+ *
+ * @return {long} timestamp
+ */
+
 int					exit_error(int exit_code, char *message);
+
+void				log_message(int id, char *message);
+
+/* Time */
+
+long				get_current_time(void);
+
+void				wait_ms(int ms);
 
 /* State */
 int					init_state(t_state **state, int argc, char **argv);
@@ -126,12 +140,29 @@ void				destroy_philosophers(t_state *state);
 t_philosopher		*get_philosopher_from_id(
 						t_philosopher **philosophers, int id);
 
-t_philosopher_state	**init_philosopher_states(t_state *state);
+t_life_cycle_state	**init_philosopher_states(t_state *state);
 
-t_philosopher_state	*destroy_philosopher_states(
-						t_philosopher_state **philosopher_states);
+t_life_cycle_state	*destroy_philosopher_states(
+		t_life_cycle_state **philosopher_states);
 
-void				*run_philosopher(void *state);
+int					*set_forks_ids(int *fork_ids,
+					  t_state *state, int philosopher_id);
+
+_Bool				check_if_can_take_forks(t_state *state, int philosopher_id);
+
+_Bool				check_if_is_dead(t_state *state, int philosopher_id);
+
+int					philosopher_eat(t_state *state, t_philosopher *philosopher);
+
+int					philosopher_sleep(t_state *state, t_philosopher *philosopher);
+
+int					philosopher_die(t_philosopher *philosopher);
+
+void				*run_life_cycle(void *philosopher_state);
+
+_Bool				check_if_a_philosopher_is_dead(t_state *state);
+
+_Bool				check_if_all_have_eaten_enough(t_state *state);
 
 /* Forks */
 int					init_forks(t_state *state, t_parameters *parameters);
@@ -144,7 +175,5 @@ pthread_t			*init_threads(t_state *state);
 pthread_t			*destroy_threads(pthread_t *threads);
 
 int					create_threads(t_state *state, pthread_t *threads,
-						t_philosopher_state **philosopher_states);
-
-int					join_threads(t_state *state, pthread_t *threads);
+									  t_life_cycle_state **philosopher_states);
 #endif

@@ -28,10 +28,9 @@ t_parameters	*init_parameters(
 	parameters->time_to_eat = ft_atoi(argv[3]);
 	parameters->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		parameters->number_of_times_each_philosopher_must_eat
-			= ft_atoi(argv[5]);
+		parameters->number_of_times_must_eat = ft_atoi(argv[5]);
 	else
-		parameters->number_of_times_each_philosopher_must_eat = -1;
+		parameters->number_of_times_must_eat = -1;
 	return (parameters);
 }
 

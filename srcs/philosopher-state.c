@@ -6,32 +6,32 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:31:03 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 14:57:22 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/07 14:57:30 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <malloc.h>
 #include "philosophers.h"
 
-t_philosopher_state	*init_philosopher_state(int id, t_state *state)
+t_life_cycle_state	*init_philosopher_state(int id, t_state *state)
 {
-	t_philosopher_state	*philosopher_state;
+	t_life_cycle_state	*philosopher_state;
 
-	philosopher_state = malloc(sizeof(t_philosopher_state));
+	philosopher_state = malloc(sizeof(t_life_cycle_state));
 	philosopher_state->id = id;
 	philosopher_state->state = state;
 	return (philosopher_state);
 }
 
-t_philosopher_state	**init_philosopher_states(t_state *state)
+t_life_cycle_state	**init_philosopher_states(t_state *state)
 {
 	int					i;
 	int					number_of_philosophers;
-	t_philosopher_state	**philosopher_states;
+	t_life_cycle_state	**philosopher_states;
 
 	number_of_philosophers = state->parameters->number_of_philosophers;
-	philosopher_states = (t_philosopher_state **)malloc(
-			sizeof(t_philosopher_state *) * number_of_philosophers);
+	philosopher_states = (t_life_cycle_state **)malloc(
+			sizeof(t_life_cycle_state *) * number_of_philosophers);
 	i = 0;
 	while (i < state->parameters->number_of_philosophers)
 	{
@@ -41,8 +41,8 @@ t_philosopher_state	**init_philosopher_states(t_state *state)
 	return (philosopher_states);
 }
 
-t_philosopher_state	*destroy_philosopher_states(
-		t_philosopher_state **philosopher_states
+t_life_cycle_state	*destroy_philosopher_states(
+		t_life_cycle_state **philosopher_states
 	)
 {
 	int		i;

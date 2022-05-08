@@ -25,7 +25,6 @@ int	init_state(t_state **state, int argc, char **argv)
 	(*state)->parameters = NULL;
 	(*state)->philosophers = NULL;
 	(*state)->forks = NULL;
-	(*state)->a_philosopher_died = false;
 	parameters = (*state)->parameters;
 	if (parse_parameters(&parameters, argc, argv) != 0)
 		return (INVALID_ARGUMENTS);

@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:31:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 15:12:00 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/08 18:11:18 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,14 @@ int	run(t_state *state)
 {
 	int					thread_result;
 	pthread_t			*threads;
-	t_philosopher_state	**philosopher_states;
+	t_life_cycle_state	**philosopher_states;
 
 	threads = init_threads(state);
 	philosopher_states = init_philosopher_states(state);
 	thread_result = create_threads(state, threads, philosopher_states);
 	if (thread_result != 0)
 		return (thread_result);
-	thread_result = join_threads(state, threads);
-	if (thread_result != 0)
-		return (thread_result);
+	while (!check_if_a_philosopher_is_dead(state) && !check_if_all_have_eaten_enough(state)) {}
 	destroy_philosopher_states(philosopher_states);
 	destroy_threads(threads);
 	return (0);
@@ -60,7 +58,7 @@ int	main(int argc, char **argv)
 	int					state_init_result;
 	int					run_result;
 
-	if (argc != 4 && argc != 5)
+	if (argc != 5 && argc != 6)
 		return (print_usage(INVALID_ARGUMENTS));
 	state = NULL;
 	state_init_result = init_state(&state, argc, argv);

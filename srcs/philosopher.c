@@ -6,11 +6,12 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:46:41 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 14:55:33 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/08 10:11:18 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <malloc.h>
+#include <stdbool.h>
 #include "philosophers.h"
 
 static t_philosopher	*init_philosopher(t_philosopher **philosopher, int id)
@@ -21,7 +22,8 @@ static t_philosopher	*init_philosopher(t_philosopher **philosopher, int id)
 	(*philosopher)->id = id;
 	(*philosopher)->state = THINKING;
 	(*philosopher)->number_of_time_has_eaten = 0;
-	(*philosopher)->last_time_has_eaten = -1;
+	(*philosopher)->last_time_has_eaten = get_current_time();
+	(*philosopher)->is_dead = false;
 	return (*philosopher);
 }
 
