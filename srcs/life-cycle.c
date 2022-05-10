@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/08 18:30:52 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:34:34 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,9 @@ void	*run_life_cycle(void *philosopher_state)
 	id = ((t_life_cycle_state *)philosopher_state)->id;
 	philosopher = get_philosopher_from_id(state->philosophers, id);
 	if (id % 2 == 0)
-		usleep(100);
+		wait_ms(1);
 	while (philosopher->is_dead == false)
 	{
-		if (check_if_is_dead(state, id) == true)
-		{
-			philosopher_die(philosopher);
-			return (NULL);
-		}
 		if (philosopher->state == THINKING)
 			philosopher_eat(state, philosopher);
 		if (philosopher->state == SLEEPING)
@@ -49,8 +44,11 @@ _Bool	check_if_a_philosopher_is_dead(t_state *state)
 	i = 0;
 	while (i < state->parameters->number_of_philosophers)
 	{
-		if (state->philosophers[i]->is_dead == true)
+		if (check_if_is_dead(state, state->philosophers[i]->id) == true)
+		{
+			philosopher_die(state, state->philosophers[i]);
 			return (true);
+		}
 		i++;
 	}
 	return (false);

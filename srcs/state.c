@@ -6,12 +6,11 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:10:43 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 14:50:40 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:28:32 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <malloc.h>
-#include <stdbool.h>
 
 #include "philosophers.h"
 
@@ -35,6 +34,7 @@ int	init_state(t_state **state, int argc, char **argv)
 		return (ERROR_WHILE_ALLOCATING_MEMORY);
 	if (pthread_mutex_init(&(*state)->forks_mutex, NULL) != 0)
 		return (ERROR_WHILE_CREATING_MUTEX);
+	(*state)->start_time = get_current_time();
 	return (0);
 }
 

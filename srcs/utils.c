@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 13:01:13 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 16:19:02 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:29:58 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,16 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-void	log_message(int id, char *message)
+void	log_message(t_state *state, int id, char *message)
 {
-	printf("%ld %d %s\n", get_current_time(), id, message);
+	long			current_time;
+	long			time_since_start;
+	t_philosopher	*philosopher;
+
+	philosopher = get_philosopher_from_id(state->philosophers, id);
+	if (philosopher->is_dead == true)
+		return;
+	current_time = get_current_time();
+	time_since_start = current_time - state->start_time;
+	printf("%6ld %3d %s\n", time_since_start, id, message);
 }

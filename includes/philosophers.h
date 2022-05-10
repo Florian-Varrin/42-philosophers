@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/08 18:22:49 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/10 17:37:14 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ typedef enum e_error_codes {
 	INVALID_ARGUMENTS = 1,
 	ERROR_WHILE_ALLOCATING_MEMORY = 2,
 	ERROR_WHILE_CREATING_MUTEX = 3,
-	ERROR_WHILE_CREATING_THREAD = 4,
-	ERROR_WHILE_JOINING_THREAD = 5
+	ERROR_WHILE_CREATING_THREAD = 4
 }	t_error_codes;
 
 typedef struct s_parameters {
@@ -60,6 +59,7 @@ typedef struct s_state {
 	t_philosopher	**philosophers;
 	t_fork			**forks;
 	pthread_mutex_t	forks_mutex;
+	long			start_time;
 }	t_state;
 
 typedef struct s_life_cycle_state {
@@ -93,7 +93,7 @@ int					ft_strlen(const char *str);
 
 int					exit_error(int exit_code, char *message);
 
-void				log_message(int id, char *message);
+void				log_message(t_state *state, int id, char *message);
 
 /* Time */
 
@@ -145,18 +145,15 @@ t_life_cycle_state	**init_philosopher_states(t_state *state);
 t_life_cycle_state	*destroy_philosopher_states(
 		t_life_cycle_state **philosopher_states);
 
-int					*set_forks_ids(int *fork_ids,
-					  t_state *state, int philosopher_id);
-
-_Bool				check_if_can_take_forks(t_state *state, int philosopher_id);
+t_fork				**set_needed_forks(t_fork **forks, t_state *state, int philosopher_id);
 
 _Bool				check_if_is_dead(t_state *state, int philosopher_id);
 
-int					philosopher_eat(t_state *state, t_philosopher *philosopher);
+void				philosopher_eat(t_state *state, t_philosopher *philosopher);
 
-int					philosopher_sleep(t_state *state, t_philosopher *philosopher);
+void				philosopher_sleep(t_state *state, t_philosopher *philosopher);
 
-int					philosopher_die(t_philosopher *philosopher);
+void				philosopher_die(t_state *state, t_philosopher *philosopher);
 
 void				*run_life_cycle(void *philosopher_state);
 
