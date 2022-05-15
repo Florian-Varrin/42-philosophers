@@ -7,6 +7,6 @@
 compile_commands.json
 .cache
 .idea
-philo
-maps
- __MACOSX
+philo/philo
+out
+__MACOSX
