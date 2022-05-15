@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/10 17:37:14 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:35:58 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,15 +145,17 @@ t_philosopher		*get_philosopher_from_id(
 t_life_cycle_state	**init_philosopher_states(t_state *state);
 
 t_life_cycle_state	*destroy_philosopher_states(
-		t_life_cycle_state **philosopher_states);
+						t_life_cycle_state **philosopher_states);
 
-t_fork				**set_needed_forks(t_fork **forks, t_state *state, int philosopher_id);
+t_fork				**set_needed_forks(
+						t_fork **forks, t_state *state, int philosopher_id);
 
 _Bool				check_if_is_dead(t_state *state, int philosopher_id);
 
 void				philosopher_eat(t_state *state, t_philosopher *philosopher);
 
-void				philosopher_sleep(t_state *state, t_philosopher *philosopher);
+void				philosopher_sleep(
+						t_state *state, t_philosopher *philosopher);
 
 void				philosopher_die(t_state *state, t_philosopher *philosopher);
 
@@ -168,11 +170,15 @@ int					init_forks(t_state *state, t_parameters *parameters);
 
 void				destroy_forks(t_state *state);
 
+void				take_forks(t_state *state, t_philosopher *philosopher);
+
+void				let_forks_go(t_state *state, int id);
+
 /* Threads */
 pthread_t			*init_threads(t_state *state);
 
 pthread_t			*destroy_threads(pthread_t *threads);
 
 int					create_threads(t_state *state, pthread_t *threads,
-									  t_life_cycle_state **philosopher_states);
+						t_life_cycle_state **philosopher_states);
 #endif

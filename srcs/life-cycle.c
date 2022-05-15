@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/15 13:15:33 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:34:25 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ _Bool	check_if_all_have_eaten_enough(t_state *state)
 	all_have_eaten_enough = true;
 	while (i < state->parameters->number_of_philosophers)
 	{
-		if (state->philosophers[i]->number_of_time_has_eaten < number_of_times_must_eat)
+		if (state->philosophers[i]->number_of_time_has_eaten
+			< number_of_times_must_eat)
 			all_have_eaten_enough = false;
 		i++;
 	}

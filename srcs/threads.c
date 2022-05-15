@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:09:08 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/08 10:15:02 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:34:54 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	create_threads(
 	while (i < state->parameters->number_of_philosophers)
 	{
 		if (pthread_create(&threads[i],
-						   NULL, &run_life_cycle, philosopher_states[i]) != 0)
+				NULL, &run_life_cycle, philosopher_states[i]) != 0)
 			return (exit_error(ERROR_WHILE_CREATING_THREAD,
 					"Error while creating thread"));
 		pthread_detach(threads[i]);

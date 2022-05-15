@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:19:49 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/15 13:22:44 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:23:29 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	wait_ms(int ms)
 	while (get_current_time() - start_time < ms)
 		usleep(WAIT_FREQ);
 }
-
