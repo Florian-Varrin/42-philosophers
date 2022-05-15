@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/10 17:34:34 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:15:33 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*run_life_cycle(void *philosopher_state)
 	id = ((t_life_cycle_state *)philosopher_state)->id;
 	philosopher = get_philosopher_from_id(state->philosophers, id);
 	if (id % 2 == 0)
-		wait_ms(1);
+		wait_ms(state->parameters->time_to_eat / 2);
 	while (philosopher->is_dead == false)
 	{
 		if (philosopher->state == THINKING)

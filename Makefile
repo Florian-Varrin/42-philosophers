@@ -25,7 +25,7 @@ NORM_BIN	= norminette
 NORM_FLAGS	= -RCheckForbiddenSourceHeader -RCheckDefine
 RM			= rm -f
 MACROFLAGS	= -D BIN_NAME=\"${NAME}\"
-CFLAGS		= -Wall -Wextra -Werror -I${HEADER_DIR} ${MACROFLAGS} -g
+CFLAGS		= -Wall -Wextra -Werror -I${HEADER_DIR} ${MACROFLAGS} -g -O0
 CC			= gcc
 
 .PHONY: 	all clean fclean re

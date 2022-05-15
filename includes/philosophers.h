@@ -15,6 +15,8 @@
 
 # include <pthread.h>
 
+# define WAIT_FREQ 50
+
 typedef enum e_philosophers_state {
 	EATING,
 	SLEEPING,

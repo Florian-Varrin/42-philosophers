@@ -6,12 +6,13 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:31:35 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/10 17:37:14 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:25:17 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-
+#include <stdio.h>
+#include <unistd.h>
 #include "philosophers.h"
 
 t_fork	**set_needed_forks(t_fork **forks, t_state *state, int philosopher_id)
@@ -47,6 +48,7 @@ void	take_forks(t_state *state, t_philosopher *philosopher)
 	{
 		take_fork(state, forks[0], &taken_forks, philosopher->id);
 		take_fork(state, forks[1], &taken_forks, philosopher->id);
+		usleep(WAIT_FREQ);
 	}
 }
 

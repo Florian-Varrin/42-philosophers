@@ -8,5 +8,5 @@ compile_commands.json
 .cache
 .idea
 philo
-maps
- __MACOSX
+out
+__MACOSX
