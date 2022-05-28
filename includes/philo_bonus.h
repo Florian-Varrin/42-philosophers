@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:48:03 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 13:52:57 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 14:45:35 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ typedef enum e_philosophers_state {
 typedef enum e_error_codes {
 	INVALID_ARGUMENTS = 1,
 	ERROR_WHILE_ALLOCATING_MEMORY = 2,
-	ERROR_WHILE_CREATING_MUTEX = 3,
-	ERROR_WHILE_CREATING_THREAD = 4
+	ERROR_WHILE_FORKING_PROCESS = 3,
+	ERROR_WHILE_CREATING_THREAD = 4,
+	ERROR_WHILE_OPENING_SEMAPHORE = 5
 }	t_error_codes;
 
 typedef struct s_parameters {
@@ -78,7 +79,7 @@ long				get_current_time(void);
 void				wait_ms(int ms);
 
 /* Philosopher */
-t_philosopher		*init_philosopher(t_philosopher **philosopher, int id);
+int					init_philosophers(t_state *state);
 
 t_philosopher		*destroy_philosopher(t_philosopher *philosopher);
 #endif

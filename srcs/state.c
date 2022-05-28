@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:10:43 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 13:55:12 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 13:55:23 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	init_state(t_state **state, int argc, char **argv)
 	*state = malloc(sizeof(t_state));
 	if (*state == NULL)
 		return (ERROR_WHILE_ALLOCATING_MEMORY);
+	sem_unlink(FORKS_SEM_NAME);
 	(*state)->parameters = NULL;
 	(*state)->philosopher = NULL;
 	(*state)->forks = NULL;

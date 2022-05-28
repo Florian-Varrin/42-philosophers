@@ -8,6 +8,6 @@ compile_commands.json
 .cache
 .idea
 philo/philo
-philo_bonus/philo_bonus
+philo_bonus
 out
 __MACOSX
