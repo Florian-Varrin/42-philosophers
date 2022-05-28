@@ -20,7 +20,7 @@ void	philosopher_eat(t_state *state, t_philosopher *philosopher)
 {
 	take_forks(state, philosopher);
 	philosopher->state = EATING;
-	log_message(state, philosopher->id, "is eating");
+	log_message(state, philosopher->id, "is eating", true);
 	philosopher->last_time_has_eaten = get_current_time();
 	philosopher->number_of_time_has_eaten++;
 	wait_ms(state->parameters->time_to_eat);
@@ -30,14 +30,14 @@ void	philosopher_eat(t_state *state, t_philosopher *philosopher)
 
 void	philosopher_sleep(t_state *state, t_philosopher *philosopher)
 {
-	log_message(state, philosopher->id, "is sleeping");
+	log_message(state, philosopher->id, "is sleeping", true);
 	wait_ms(state->parameters->time_to_sleep);
 	philosopher->state = THINKING;
-	log_message(state, philosopher->id, "is thinking");
+	log_message(state, philosopher->id, "is thinking", true);
 }
 
 void	philosopher_die(t_state *state, t_philosopher *philosopher)
 {
-	log_message(state, philosopher->id, "died");
+	log_message(state, philosopher->id, "died", false);
 	philosopher->is_dead = true;
 }

@@ -34,6 +34,8 @@ int	init_state(t_state **state, int argc, char **argv)
 		return (ERROR_WHILE_ALLOCATING_MEMORY);
 	if (pthread_mutex_init(&(*state)->forks_mutex, NULL) != 0)
 		return (ERROR_WHILE_CREATING_MUTEX);
+	if (pthread_mutex_init(&(*state)->write_mutex, NULL) != 0)
+		return (ERROR_WHILE_CREATING_MUTEX);
 	(*state)->start_time = get_current_time();
 	return (0);
 }
