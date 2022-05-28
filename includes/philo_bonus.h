@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:48:03 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 14:45:35 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:08:46 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 #include <semaphore.h>
 
 # define WAIT_FREQ 50
+
 # define FORKS_SEM_NAME "/forks"
+# define SIM_END_SEM_NAME "/simEnd"
+# define EATEN_ENOUGH_SEM_NAME "/allHaveEatenEnough"
 
 typedef enum e_philosophers_state {
 	EATING,
@@ -53,13 +56,19 @@ typedef struct s_state
 	t_parameters 	*parameters;
 	t_philosopher	*philosopher;
 	sem_t			*forks;
+	sem_t			*simulation_end;
+	sem_t			*number_have_eaten_enough;
 	long 			start_time;
+	int				*pids;
 }	t_state;
 
 /* Utils */
 
 int				ft_strlen(const char *str);
+
 int				ft_atoi(const char *str);
+
+void			log_message(t_state *state, char *message);
 
 /* State */
 int				init_state(t_state **state, int argc, char **argv);
@@ -82,4 +91,30 @@ void				wait_ms(int ms);
 int					init_philosophers(t_state *state);
 
 t_philosopher		*destroy_philosopher(t_philosopher *philosopher);
+
+void				philosopher_eat(t_state *state);
+
+void				philosopher_sleep(t_state *state);
+
+void				philosopher_die(t_state *state);
+
+/* Forks */
+
+void				take_forks(t_state *state);
+
+void				let_forks_go(t_state *state);
+
+/* Semaphores */
+void				unlink_semaphores(void);
+
+void				create_semaphores(t_state *state);
+
+void				open_semaphores(t_state *state);
+
+void				destroy_semaphores(t_state *state);
+
+/* Life Cycle */
+void				*run_life_cycle(t_state *state);
+
+void				*check_all_have_eaten_enough(void *state_arg);
 #endif
