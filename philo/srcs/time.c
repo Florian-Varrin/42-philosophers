@@ -6,14 +6,13 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 10:19:49 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 13:49:23 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 13:23:29 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>
 #include <unistd.h>
-
-#include <philo_bonus.h>
+#include "philo.h"
 
 long	get_current_time(void)
 {

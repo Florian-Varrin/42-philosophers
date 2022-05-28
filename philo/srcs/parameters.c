@@ -12,8 +12,7 @@
 
 #include <malloc.h>
 #include <stdbool.h>
-
-#include <philo_bonus.h>
+#include "philo.h"
 
 t_parameters	*init_parameters(
 		t_parameters *parameters,

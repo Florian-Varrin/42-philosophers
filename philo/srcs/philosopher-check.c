@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   forks.c                                            :+:      :+:    :+:   */
+/*   philosopher-check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/28 15:19:00 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:08:35 by fvarrin          ###   ########.fr       */
+/*   Created: 2022/05/07 15:31:00 by fvarrin           #+#    #+#             */
+/*   Updated: 2022/05/08 19:32:50 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo_bonus.h>
-#include <stdbool.h>
+#include "philo.h"
 
-void	take_forks(t_state *state)
+_Bool	check_if_is_dead(t_state *state, int philosopher_id)
 {
-	sem_wait(state->forks);
-	log_message(state, "has taken fork", true);
-	sem_wait(state->forks);
-	log_message(state, "has taken fork", true);
-}
+	t_philosopher	*philosopher;
+	long			time_since_eaten;
 
-void	let_forks_go(t_state *state)
-{
-	sem_post(state->forks);
-	sem_post(state->forks);
+	philosopher = get_philosopher_from_id(state->philosophers, philosopher_id);
+	time_since_eaten = get_current_time() - philosopher->last_time_has_eaten;
+	return ((int)time_since_eaten > state->parameters->time_to_die);
 }

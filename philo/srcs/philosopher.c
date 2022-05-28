@@ -6,17 +6,15 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:46:41 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 17:51:47 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/08 10:11:18 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <malloc.h>
 #include <stdbool.h>
+#include "philo.h"
 
-#include <philo_bonus.h>
-#include <unistd.h>
-
-t_philosopher	*init_philosopher(t_philosopher **philosopher, int id)
+static t_philosopher	*init_philosopher(t_philosopher **philosopher, int id)
 {
 	*philosopher = (t_philosopher *)malloc(sizeof(t_philosopher));
 	if (*philosopher == NULL)
@@ -29,33 +27,40 @@ t_philosopher	*init_philosopher(t_philosopher **philosopher, int id)
 	return (*philosopher);
 }
 
-t_philosopher	*destroy_philosopher(t_philosopher *philosopher)
+static t_philosopher	*destroy_philosopher(t_philosopher *philosopher)
 {
 	free(philosopher);
 	return (NULL);
 }
 
-int	init_philosophers(t_state *state)
+int	init_philosophers(t_state *state, t_parameters *parameters)
 {
 	int		i;
-	int		id;
-	int		init_philosophers;
 
+	state->philosophers = malloc(
+			sizeof(t_philosopher *) * parameters->number_of_philosophers);
+	if (state->philosophers == NULL)
+		return (ERROR_WHILE_ALLOCATING_MEMORY);
 	i = 0;
-	init_philosophers = 0;
-	while (i < state->parameters->number_of_philosophers)
+	while (i < parameters->number_of_philosophers)
 	{
-		id = fork();
-		if (id == -1)
-			return (ERROR_WHILE_FORKING_PROCESS);
-		else if (id == 0)
-		{
-			init_philosopher(&state->philosopher, i + 1);
-			break ;
-		}
-		else
-			state->pids[init_philosophers++] = id;
+		init_philosopher(&(state->philosophers[i]), i + 1);
 		i++;
 	}
 	return (0);
+}
+
+void	destroy_philosophers(t_state *state)
+{
+	int		i;
+
+	i = 0;
+	while (i < state->parameters->number_of_philosophers)
+		destroy_philosopher(state->philosophers[i++]);
+	free(state->philosophers);
+}
+
+t_philosopher	*get_philosopher_from_id(t_philosopher **philosophers, int id)
+{
+	return (philosophers[id - 1]);
 }
