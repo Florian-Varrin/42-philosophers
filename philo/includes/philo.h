@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/15 13:35:58 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/15 14:02:28 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <pthread.h>
 
@@ -22,11 +22,6 @@ typedef enum e_philosophers_state {
 	SLEEPING,
 	THINKING
 }	t_philosophers_state;
-
-typedef enum e_fork_state {
-	FREE,
-	USED
-}	t_fork_state;
 
 typedef enum e_error_codes {
 	INVALID_ARGUMENTS = 1,
@@ -42,6 +37,11 @@ typedef struct s_parameters {
 	int	time_to_sleep;
 	int	number_of_times_must_eat;
 }	t_parameters;
+
+typedef enum e_fork_state {
+	FREE,
+	USED
+}	t_fork_state;
 
 typedef struct s_philosopher {
 	int						id;

@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "philosophers.h"
+#include "philo.h"
 
 void	philosopher_eat(t_state *state, t_philosopher *philosopher)
 {

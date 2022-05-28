@@ -13,7 +13,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#include "philosophers.h"
+#include "philo.h"
 
 _Bool	ft_isspace(const char c)
 {
