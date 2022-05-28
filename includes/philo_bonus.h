@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:48:03 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:08:46 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:20:12 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define FORKS_SEM_NAME "/forks"
 # define SIM_END_SEM_NAME "/simEnd"
 # define EATEN_ENOUGH_SEM_NAME "/allHaveEatenEnough"
+# define CAN_WRITE_SEM_NAME "/canWrite"
 
 typedef enum e_philosophers_state {
 	EATING,
@@ -58,6 +59,7 @@ typedef struct s_state
 	sem_t			*forks;
 	sem_t			*simulation_end;
 	sem_t			*number_have_eaten_enough;
+	sem_t			*can_write;
 	long 			start_time;
 	int				*pids;
 }	t_state;
@@ -68,7 +70,7 @@ int				ft_strlen(const char *str);
 
 int				ft_atoi(const char *str);
 
-void			log_message(t_state *state, char *message);
+void			log_message(t_state *state, char *message, _Bool release_sem);
 
 /* State */
 int				init_state(t_state **state, int argc, char **argv);

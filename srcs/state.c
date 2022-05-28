@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:10:43 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 17:58:05 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:17:22 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	init_state(t_state **state, int argc, char **argv)
 	(*state)->forks = NULL;
 	(*state)->simulation_end = NULL;
 	(*state)->number_have_eaten_enough = NULL;
+	(*state)->can_write = NULL;
 	parameters = (*state)->parameters;
 	if (parse_parameters(&parameters, argc, argv) != 0)
 		return (INVALID_ARGUMENTS);

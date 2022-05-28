@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:27:11 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:09:22 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:20:46 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,30 @@ void	unlink_semaphores(void)
 	sem_unlink(FORKS_SEM_NAME);
 	sem_unlink(SIM_END_SEM_NAME);
 	sem_unlink(EATEN_ENOUGH_SEM_NAME);
+	sem_unlink(CAN_WRITE_SEM_NAME);
 }
 
 void	create_semaphores(t_state *state)
 {
-	state->forks = sem_open(FORKS_SEM_NAME, O_CREAT | O_EXCL, 0777,
+	int	flags;
+	int	mode;
+
+	flags = O_CREAT | O_EXCL;
+	mode = 0600;
+	state->forks = sem_open(FORKS_SEM_NAME, flags, mode,
 							state->parameters->number_of_philosophers);
 	if (state->forks == SEM_FAILED)
 		exit(ERROR_WHILE_OPENING_SEMAPHORE);
 	state->simulation_end = sem_open(SIM_END_SEM_NAME,
-									 O_CREAT | O_EXCL, 0777, 0);
+									 flags, mode, 0);
 	if (state->simulation_end == SEM_FAILED)
 		exit(ERROR_WHILE_OPENING_SEMAPHORE);
 	state->number_have_eaten_enough = sem_open(EATEN_ENOUGH_SEM_NAME,
-											   O_CREAT | O_EXCL, 0777, 0);
+											   flags, mode, 0);
 	if (state->number_have_eaten_enough == SEM_FAILED)
+		exit(ERROR_WHILE_OPENING_SEMAPHORE);
+	state->can_write = sem_open(CAN_WRITE_SEM_NAME, flags, mode, 1);
+	if (state->can_write == SEM_FAILED)
 		exit(ERROR_WHILE_OPENING_SEMAPHORE);
 }
 
@@ -45,4 +54,5 @@ void	destroy_semaphores(t_state *state)
 	sem_destroy(state->forks);
 	sem_destroy(state->simulation_end);
 	sem_destroy(state->number_have_eaten_enough);
+	sem_destroy(state->can_write);
 }

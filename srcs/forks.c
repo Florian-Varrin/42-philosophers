@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:19:00 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:02:28 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:08:35 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	take_forks(t_state *state)
 {
 	sem_wait(state->forks);
-	log_message(state, "has taken fork");
+	log_message(state, "has taken fork", true);
 	sem_wait(state->forks);
-	log_message(state, "has taken fork");
+	log_message(state, "has taken fork", true);
 }
 
 void	let_forks_go(t_state *state)
