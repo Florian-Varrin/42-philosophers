@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/15 14:02:28 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:30:05 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_state {
 	t_philosopher	**philosophers;
 	t_fork			**forks;
 	pthread_mutex_t	forks_mutex;
+	pthread_mutex_t	write_mutex;
 	long			start_time;
 }	t_state;
 
@@ -95,7 +96,7 @@ int					ft_strlen(const char *str);
 
 int					exit_error(int exit_code, char *message);
 
-void				log_message(t_state *state, int id, char *message);
+void				log_message(t_state *state, int id, char *message, _Bool release_mutex);
 
 /* Time */
 

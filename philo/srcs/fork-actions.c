@@ -6,11 +6,13 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:31:49 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/15 13:33:44 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:33:25 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdbool.h>
+
 #include "philo.h"
 
 t_fork	**set_needed_forks(t_fork **forks, t_state *state, int philosopher_id)
@@ -31,7 +33,7 @@ void	take_fork(t_state *state, t_fork *fork, int *taken_forks, int id)
 		fork->state = USED;
 		(*taken_forks)++;
 		pthread_mutex_unlock(&state->forks_mutex);
-		log_message(state, id, "has taken a fork");
+		log_message(state, id, "has taken a fork", true);
 	}
 }
 
