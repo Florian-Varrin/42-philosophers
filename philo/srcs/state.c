@@ -12,7 +12,7 @@
 
 #include <malloc.h>
 
-#include "philosophers.h"
+#include "philo.h"
 
 int	init_state(t_state **state, int argc, char **argv)
 {

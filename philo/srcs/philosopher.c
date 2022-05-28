@@ -12,7 +12,7 @@
 
 #include <malloc.h>
 #include <stdbool.h>
-#include "philosophers.h"
+#include "philo.h"
 
 static t_philosopher	*init_philosopher(t_philosopher **philosopher, int id)
 {

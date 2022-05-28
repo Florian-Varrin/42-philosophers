@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <malloc.h>
-#include "philosophers.h"
+#include "philo.h"
 
 static t_fork	*init_fork(t_fork **fork, int id)
 {

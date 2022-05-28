@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "philosophers.h"
+#include "philo.h"
 
 t_fork	**set_needed_forks(t_fork **forks, t_state *state, int philosopher_id)
 {

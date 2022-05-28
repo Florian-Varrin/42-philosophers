@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 _Bool	check_if_is_dead(t_state *state, int philosopher_id)
 {

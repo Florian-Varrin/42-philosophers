@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <malloc.h>
-#include "philosophers.h"
+#include "philo.h"
 
 t_life_cycle_state	*init_philosopher_state(int id, t_state *state)
 {

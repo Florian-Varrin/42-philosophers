@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
-#include "philosophers.h"
+#include "philo.h"
 
 void	*run_life_cycle(void *philosopher_state)
 {
