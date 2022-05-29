@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:02:58 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:30:05 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/29 12:14:11 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,12 @@ int					ft_strlen(const char *str);
 
 int					exit_error(int exit_code, char *message);
 
-void				log_message(t_state *state, int id, char *message, _Bool release_mutex);
+void				log_message(
+						t_state *state,
+						int id,
+						char *message,
+						_Bool release_mutex
+						);
 
 /* Time */
 
