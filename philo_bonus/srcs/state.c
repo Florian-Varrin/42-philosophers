@@ -6,13 +6,13 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:10:43 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/29 12:14:11 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:17:22 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <malloc.h>
 
-#include "philo.h"
+#include <philo_bonus.h>
 
 int	init_state(t_state **state, int argc, char **argv)
 {
@@ -21,47 +21,33 @@ int	init_state(t_state **state, int argc, char **argv)
 	*state = malloc(sizeof(t_state));
 	if (*state == NULL)
 		return (ERROR_WHILE_ALLOCATING_MEMORY);
+	unlink_semaphores();
 	(*state)->parameters = NULL;
-	(*state)->philosophers = NULL;
+	(*state)->philosopher = NULL;
 	(*state)->forks = NULL;
+	(*state)->simulation_end = NULL;
+	(*state)->number_have_eaten_enough = NULL;
+	(*state)->can_write = NULL;
 	parameters = (*state)->parameters;
 	if (parse_parameters(&parameters, argc, argv) != 0)
 		return (INVALID_ARGUMENTS);
 	(*state)->parameters = parameters;
-	if (init_philosophers(*state, parameters) != 0)
-		return (ERROR_WHILE_ALLOCATING_MEMORY);
-	if (init_forks(*state, parameters) != 0)
-		return (ERROR_WHILE_ALLOCATING_MEMORY);
-	if (pthread_mutex_init(&(*state)->forks_mutex, NULL) != 0)
-		return (ERROR_WHILE_CREATING_MUTEX);
-	if (pthread_mutex_init(&(*state)->write_mutex, NULL) != 0)
-		return (ERROR_WHILE_CREATING_MUTEX);
 	(*state)->start_time = get_current_time();
+	(*state)->pids = malloc(sizeof(int) * parameters->number_of_philosophers);
 	return (0);
 }
 
 t_state	*destroy_state(t_state *state)
 {
-	pthread_mutex_destroy(&state->forks_mutex);
 	if (state->parameters == NULL)
 	{
 		free(state);
 		return (NULL);
 	}
-	if (state->philosophers == NULL)
-	{
-		free(state->parameters);
-		free(state);
-		return (NULL);
-	}
-	destroy_philosophers(state);
-	if (state->forks == NULL)
-	{
-		free(state->parameters);
-		free(state);
-		return (NULL);
-	}
-	destroy_forks(state);
+	if (state->philosopher != NULL)
+		destroy_philosopher(state->philosopher);
+	destroy_semaphores(state);
+	free(state->pids);
 	free(state->parameters);
 	free(state);
 	return (NULL);

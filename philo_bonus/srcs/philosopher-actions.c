@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:31:35 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/29 12:14:11 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/28 18:22:31 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,39 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "philo.h"
+#include <philo_bonus.h>
 
-void	philosopher_eat(t_state *state, t_philosopher *philosopher)
+void	philosopher_eat(t_state *state)
 {
-	take_forks(state, philosopher);
+	t_philosopher	*philosopher;
+
+	philosopher = state->philosopher;
+	take_forks(state);
 	philosopher->state = EATING;
-	log_message(state, philosopher->id, "is eating", true);
+	log_message(state, "is eating", true);
 	philosopher->last_time_has_eaten = get_current_time();
 	philosopher->number_of_time_has_eaten++;
 	wait_ms(state->parameters->time_to_eat);
-	let_forks_go(state, philosopher->id);
+	let_forks_go(state);
 	philosopher->state = SLEEPING;
 }
 
-void	philosopher_sleep(t_state *state, t_philosopher *philosopher)
+void	philosopher_sleep(t_state *state)
 {
-	log_message(state, philosopher->id, "is sleeping", true);
+	t_philosopher	*philosopher;
+
+	philosopher = state->philosopher;
+	log_message(state, "is sleeping", true);
 	wait_ms(state->parameters->time_to_sleep);
 	philosopher->state = THINKING;
-	log_message(state, philosopher->id, "is thinking", true);
+	log_message(state, "is thinking", true);
 }
 
-void	philosopher_die(t_state *state, t_philosopher *philosopher)
+void	philosopher_die(t_state *state)
 {
-	log_message(state, philosopher->id, "died", false);
+	t_philosopher	*philosopher;
+
+	philosopher = state->philosopher;
+	log_message(state, "died", false);
 	philosopher->is_dead = true;
 }
