@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 17:13:41 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/29 12:20:13 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	*death_checker(void *state_arg)
 {
 	t_state			*state;
 	t_philosopher	*philosopher;
-	long			time_since_eaten;
+	long			time_since_eat;
 
 	state = (t_state *)state_arg;
 	philosopher = state->philosopher;
 	while (!philosopher->is_dead)
 	{
-		time_since_eaten = get_current_time() - philosopher->last_time_has_eaten;
-		if ((int)time_since_eaten > state->parameters->time_to_die)
+		time_since_eat = get_current_time() - philosopher->last_time_has_eaten;
+		if ((int)time_since_eat > state->parameters->time_to_die)
 		{
 			philosopher_die(state);
 			sem_post(state->simulation_end);
@@ -45,7 +45,7 @@ void	*eat_number_checker(void *state_arg)
 	t_state			*state;
 	t_philosopher	*philosopher;
 	int				number_of_times_must_eat;
-	int 			*number_of_time_has_eaten;
+	int				*number_of_time_has_eaten;
 
 	state = (t_state *)state_arg;
 	philosopher = state->philosopher;
@@ -64,10 +64,10 @@ void	*eat_number_checker(void *state_arg)
 int	start_philosopher_checkers(t_state *state, thread_t *threads)
 {
 	int		result_death;
-	int		result_eater;
+	int		result_eat;
 
 	result_death = pthread_create(&threads[0], NULL, &death_checker, state);
-	result_eater = pthread_create(&threads[1], NULL, &eat_number_checker, state);
+	result_eat = pthread_create(&threads[1], NULL, &eat_number_checker, state);
 	if (result_death != 0 || result_eater != 0)
 	{
 		sem_post(state->simulation_end);

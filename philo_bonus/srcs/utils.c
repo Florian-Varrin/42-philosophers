@@ -76,4 +76,3 @@ void	log_message(t_state *state, char *message, _Bool release_sem)
 	if (release_sem)
 		sem_post(state->can_write);
 }
-

@@ -96,7 +96,12 @@ int					ft_strlen(const char *str);
 
 int					exit_error(int exit_code, char *message);
 
-void				log_message(t_state *state, int id, char *message, _Bool release_mutex);
+void				log_message(
+						t_state *state,
+						int id,
+						char *message,
+						_Bool release_mutex
+						);
 
 /* Time */
 

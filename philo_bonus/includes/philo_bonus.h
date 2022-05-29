@@ -6,14 +6,14 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:48:03 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:20:12 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/29 12:22:30 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
-#include <semaphore.h>
+# include <semaphore.h>
 
 # define WAIT_FREQ 50
 
@@ -54,13 +54,13 @@ typedef struct s_philosopher {
 
 typedef struct s_state
 {
-	t_parameters 	*parameters;
+	t_parameters	*parameters;
 	t_philosopher	*philosopher;
 	sem_t			*forks;
 	sem_t			*simulation_end;
 	sem_t			*number_have_eaten_enough;
 	sem_t			*can_write;
-	long 			start_time;
+	long			start_time;
 	int				*pids;
 }	t_state;
 
@@ -75,48 +75,45 @@ void			log_message(t_state *state, char *message, _Bool release_sem);
 /* State */
 int				init_state(t_state **state, int argc, char **argv);
 
-t_state				*destroy_state(t_state *state);
+t_state			*destroy_state(t_state *state);
 
 /* Parameters */
-int					parse_parameters(
-		t_parameters **parameters,
-		int argc,
-		char **argv
-);
+int				parse_parameters(t_parameters **parameters, int argc,
+					char **argv);
 
 /* Time */
-long				get_current_time(void);
+long			get_current_time(void);
 
-void				wait_ms(int ms);
+void			wait_ms(int ms);
 
 /* Philosopher */
-int					init_philosophers(t_state *state);
+int				init_philosophers(t_state *state);
 
-t_philosopher		*destroy_philosopher(t_philosopher *philosopher);
+t_philosopher	*destroy_philosopher(t_philosopher *philosopher);
 
-void				philosopher_eat(t_state *state);
+void			philosopher_eat(t_state *state);
 
-void				philosopher_sleep(t_state *state);
+void			philosopher_sleep(t_state *state);
 
-void				philosopher_die(t_state *state);
+void			philosopher_die(t_state *state);
 
 /* Forks */
 
-void				take_forks(t_state *state);
+void			take_forks(t_state *state);
 
-void				let_forks_go(t_state *state);
+void			let_forks_go(t_state *state);
 
 /* Semaphores */
-void				unlink_semaphores(void);
+void			unlink_semaphores(void);
 
-void				create_semaphores(t_state *state);
+void			create_semaphores(t_state *state);
 
-void				open_semaphores(t_state *state);
+void			open_semaphores(t_state *state);
 
-void				destroy_semaphores(t_state *state);
+void			destroy_semaphores(t_state *state);
 
 /* Life Cycle */
-void				*run_life_cycle(t_state *state);
+void			*run_life_cycle(t_state *state);
 
-void				*check_all_have_eaten_enough(void *state_arg);
+void			*check_all_have_eaten_enough(void *state_arg);
 #endif

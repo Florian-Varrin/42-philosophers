@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:27:11 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:20:46 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/29 12:18:48 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void	create_semaphores(t_state *state)
 	flags = O_CREAT | O_EXCL;
 	mode = 0600;
 	state->forks = sem_open(FORKS_SEM_NAME, flags, mode,
-							state->parameters->number_of_philosophers);
+			state->parameters->number_of_philosophers);
 	if (state->forks == SEM_FAILED)
 		exit(ERROR_WHILE_OPENING_SEMAPHORE);
 	state->simulation_end = sem_open(SIM_END_SEM_NAME,
-									 flags, mode, 0);
+			flags, mode, 0);
 	if (state->simulation_end == SEM_FAILED)
 		exit(ERROR_WHILE_OPENING_SEMAPHORE);
 	state->number_have_eaten_enough = sem_open(EATEN_ENOUGH_SEM_NAME,
-											   flags, mode, 0);
+			flags, mode, 0);
 	if (state->number_have_eaten_enough == SEM_FAILED)
 		exit(ERROR_WHILE_OPENING_SEMAPHORE);
 	state->can_write = sem_open(CAN_WRITE_SEM_NAME, flags, mode, 1);
