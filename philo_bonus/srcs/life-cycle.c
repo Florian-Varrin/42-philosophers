@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/29 12:20:13 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/05/29 12:24:23 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	start_philosopher_checkers(t_state *state, thread_t *threads)
 
 	result_death = pthread_create(&threads[0], NULL, &death_checker, state);
 	result_eat = pthread_create(&threads[1], NULL, &eat_number_checker, state);
-	if (result_death != 0 || result_eater != 0)
+	if (result_death != 0 || result_eat != 0)
 	{
 		sem_post(state->simulation_end);
 		exit(ERROR_WHILE_CREATING_THREAD);
