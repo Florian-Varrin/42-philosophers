@@ -6,11 +6,11 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:46:41 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/08 10:11:18 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 11:44:03 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include "philo.h"
 

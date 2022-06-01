@@ -6,14 +6,14 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 15:09:08 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/15 13:34:54 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 11:20:02 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 #include <pthread.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 pthread_t	*init_threads(t_state *state)
 {

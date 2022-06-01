@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/29 12:24:23 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 11:49:38 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include <pthread.h>
+#include <stdlib.h>
 
 #include <philo_bonus.h>
-#include <thread_db.h>
-#include <stdlib.h>
 
 void	*death_checker(void *state_arg)
 {
@@ -61,7 +61,7 @@ void	*eat_number_checker(void *state_arg)
 	return (NULL);
 }
 
-int	start_philosopher_checkers(t_state *state, thread_t *threads)
+int	start_philosopher_checkers(t_state *state, pthread_t *threads)
 {
 	int		result_death;
 	int		result_eat;
@@ -81,7 +81,7 @@ int	start_philosopher_checkers(t_state *state, thread_t *threads)
 void	*run_life_cycle(t_state *state)
 {
 	t_philosopher	*philosopher;
-	thread_t		threads[2];
+	pthread_t		threads[2];
 
 	start_philosopher_checkers(state, threads);
 	philosopher = state->philosopher;

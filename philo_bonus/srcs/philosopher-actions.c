@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 13:31:35 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:22:31 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 11:54:46 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	philosopher_die(t_state *state)
 	philosopher = state->philosopher;
 	log_message(state, "died", false);
 	philosopher->is_dead = true;
+	destroy_semaphores(state);
 }
