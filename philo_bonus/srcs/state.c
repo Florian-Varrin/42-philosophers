@@ -6,11 +6,11 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:10:43 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/28 18:17:22 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:07:10 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 
 #include <philo_bonus.h>
 
@@ -46,7 +46,6 @@ t_state	*destroy_state(t_state *state)
 	}
 	if (state->philosopher != NULL)
 		destroy_philosopher(state->philosopher);
-	destroy_semaphores(state);
 	free(state->pids);
 	free(state->parameters);
 	free(state);

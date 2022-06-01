@@ -6,11 +6,11 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 12:53:12 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/04/24 14:59:34 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 11:19:52 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 #include "philo.h"
 
 static t_fork	*init_fork(t_fork **fork, int id)

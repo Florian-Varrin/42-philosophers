@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 13:41:28 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/29 12:16:52 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:06:05 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int	run(t_state *state)
 	{
 		if (pthread_create(&eat_checker, NULL,
 				&check_all_have_eaten_enough, state) != 0)
+		{
+			kill_processes(state);
 			exit(ERROR_WHILE_CREATING_THREAD);
+		}
 		pthread_detach(eat_checker);
 		sem_wait(state->simulation_end);
 		kill_processes(state);

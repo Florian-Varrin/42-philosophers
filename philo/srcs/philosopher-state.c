@@ -6,11 +6,11 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 14:31:03 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/07 14:57:30 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 11:44:20 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 #include "philo.h"
 
 t_life_cycle_state	*init_philosopher_state(int id, t_state *state)

@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/15 13:34:25 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 13:26:47 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
+
 #include "philo.h"
 
 void	*run_life_cycle(void *philosopher_state)

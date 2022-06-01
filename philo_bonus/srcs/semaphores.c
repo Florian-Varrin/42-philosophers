@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:27:11 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/05/29 12:18:48 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:05:54 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	create_semaphores(t_state *state)
 
 void	destroy_semaphores(t_state *state)
 {
-	sem_destroy(state->forks);
-	sem_destroy(state->simulation_end);
-	sem_destroy(state->number_have_eaten_enough);
-	sem_destroy(state->can_write);
+	sem_close(state->forks);
+	sem_close(state->simulation_end);
+	sem_close(state->number_have_eaten_enough);
+	sem_close(state->can_write);
 }
