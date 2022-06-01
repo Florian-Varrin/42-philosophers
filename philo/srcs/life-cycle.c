@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:30:04 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/06/01 11:48:56 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 13:26:47 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
-#include <pthread.h>
 
 #include "philo.h"
 

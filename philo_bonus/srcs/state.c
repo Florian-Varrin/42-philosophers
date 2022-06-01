@@ -6,7 +6,7 @@
 /*   By: fvarrin <florian.varrin@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 14:10:43 by fvarrin           #+#    #+#             */
-/*   Updated: 2022/06/01 11:43:46 by fvarrin          ###   ########.fr       */
+/*   Updated: 2022/06/01 14:07:10 by fvarrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_state	*destroy_state(t_state *state)
 	}
 	if (state->philosopher != NULL)
 		destroy_philosopher(state->philosopher);
-	destroy_semaphores(state);
 	free(state->pids);
 	free(state->parameters);
 	free(state);
